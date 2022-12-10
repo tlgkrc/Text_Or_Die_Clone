@@ -30,14 +30,12 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-            ScoreSignals.Instance.onUpdatePlayerScore += OnUpdatePlayerScore;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
         }
 
         private void UnsubscribeEvents()
         {
-            ScoreSignals.Instance.onUpdatePlayerScore -= OnUpdatePlayerScore;
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
         }

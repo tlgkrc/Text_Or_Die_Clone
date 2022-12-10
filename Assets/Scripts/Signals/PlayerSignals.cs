@@ -10,5 +10,7 @@ namespace Signals
         public UnityAction<float> onGetNewPlayerScale = delegate{  };
         public UnityAction onActivateImpactBomb = delegate {  };
         public UnityAction onActivatePlayerBomb = delegate {  };
+        public Func<ushort> onGetAICount = delegate { return 0;};
+        public UnityAction<string[]> onSetAIAnswers = delegate {  };
     }
 }

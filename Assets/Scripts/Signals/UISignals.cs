@@ -10,5 +10,10 @@ namespace Signals
         public UnityAction<UIPanels> onClosePanel = delegate { };
         public UnityAction<ushort> onSetBestScore = delegate {  };
         public UnityAction<ushort> onSetScoreText = delegate { };
+        public UnityAction<char> onAddCharToInputText = delegate{ };
+        public UnityAction onDeleteInputText = delegate {  };
+        public UnityAction onSubmitInputText = delegate {  };
+        public UnityAction<string> onSetQuestionText = delegate {  };
+        public UnityAction<string> onCheckAnswer = delegate {  };
     }
 }

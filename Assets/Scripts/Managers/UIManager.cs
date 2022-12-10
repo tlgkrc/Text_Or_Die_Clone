@@ -18,14 +18,16 @@ namespace Managers
         #region Serialized Variables
         
         [SerializeField] private List<GameObject> panels;
-        [SerializeField] private TextMeshProUGUI scoreText;
+        //[SerializeField] private TextMeshProUGUI scoreText;
+        [SerializeField] private TextMeshProUGUI questionText;
+        [SerializeField] private UIInputController uIInputController;
 
         #endregion
 
         #region Private Variables
         
         private UIPanelController _uiPanelController;
-        
+
         #endregion
 
         #endregion
@@ -52,6 +54,10 @@ namespace Managers
             UISignals.Instance.onClosePanel += OnClosePanel;
             UISignals.Instance.onSetScoreText += OnSetScoreText;
             UISignals.Instance.onSetBestScore += OnSetBestScore;
+            UISignals.Instance.onAddCharToInputText += OnAddCharToInputText;
+            UISignals.Instance.onDeleteInputText += OnDeleteInputText;
+            UISignals.Instance.onSubmitInputText += OnSubmitInputText;
+            UISignals.Instance.onSetQuestionText += OnSetQuestionText;
         }
 
         private void UnsubscribeEvents()
@@ -63,6 +69,10 @@ namespace Managers
             UISignals.Instance.onOpenPanel -= OnOpenPanel;
             UISignals.Instance.onClosePanel -= OnClosePanel;
             UISignals.Instance.onSetScoreText -= OnSetScoreText;
+            UISignals.Instance.onAddCharToInputText -= OnAddCharToInputText;
+            UISignals.Instance.onDeleteInputText -= OnDeleteInputText;
+            UISignals.Instance.onSubmitInputText -= OnSubmitInputText;
+            UISignals.Instance.onSetQuestionText -= OnSetQuestionText;
         }
 
         private void OnDisable()
@@ -107,7 +117,7 @@ namespace Managers
 
         private void OnSetScoreText(ushort score)
         {
-            scoreText.text = score.ToString();
+            //scoreText.text = score.ToString();
         }
 
         private void OnSetBestScore(ushort best)
@@ -123,6 +133,26 @@ namespace Managers
         public void Play()
         {
             CoreGameSignals.Instance.onPlay?.Invoke();
+        }
+
+        private void OnAddCharToInputText(char character)
+        {
+            uIInputController.AddCharToInputText(character);
+        }
+
+        private void OnDeleteInputText()
+        {
+            uIInputController.DeleteInputText();
+        }
+
+        private void OnSubmitInputText()
+        {
+            uIInputController.SubmitInputText();
+        }
+
+        private void OnSetQuestionText(string question)
+        {
+            questionText.text = question;
         }
     }
 }
