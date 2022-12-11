@@ -112,9 +112,9 @@ namespace Managers
             platformController.WriteTrueAnswerToPlatforms(trueAnswer);
         }
 
-        public void RisePlayer(float countOfStair)
+        public void RisePlayer(float countOfStair,float delayTime)
         {
-            transform.DOLocalMoveY(countOfStair,.25f).SetEase(Ease.OutBack);
+            transform.DOLocalMoveY( countOfStair,delayTime/2).SetEase(Ease.OutBack);
         }
 
         private void OnSetPlayerName(string playerName)

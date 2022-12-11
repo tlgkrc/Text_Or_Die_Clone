@@ -9,5 +9,6 @@ namespace Signals
         public UnityAction onNextTournament = delegate {  }; 
         public UnityAction onLevelFailed = delegate {  };
         public UnityAction onLevelSuccesfull  =delegate {  };
+        public UnityAction onRiseWaterLevel = delegate {  };
     }
 }

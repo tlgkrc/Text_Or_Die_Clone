@@ -18,10 +18,10 @@ namespace Managers
         #region Serialized Variables
         
         [SerializeField] private List<GameObject> panels;
-        //[SerializeField] private TextMeshProUGUI scoreText;
         [SerializeField] private TextMeshProUGUI questionText;
         [SerializeField] private UIInputController uIInputController;
         [SerializeField] private GameObject keyboardGameObject;
+        [SerializeField] private UIAnimController animController;
 
         #endregion
 
@@ -54,11 +54,11 @@ namespace Managers
             UISignals.Instance.onOpenPanel += OnOpenPanel;
             UISignals.Instance.onClosePanel += OnClosePanel;
             UISignals.Instance.onSetScoreText += OnSetScoreText;
-            UISignals.Instance.onSetBestScore += OnSetBestScore;
             UISignals.Instance.onAddCharToInputText += OnAddCharToInputText;
             UISignals.Instance.onDeleteInputText += OnDeleteInputText;
             UISignals.Instance.onSubmitInputText += OnSubmitInputText;
             UISignals.Instance.onSetQuestionText += OnSetQuestionText;
+            QASignals.Instance.onNextQuestion += OnNextQuestion;
         }
 
         private void UnsubscribeEvents()
@@ -74,6 +74,7 @@ namespace Managers
             UISignals.Instance.onDeleteInputText -= OnDeleteInputText;
             UISignals.Instance.onSubmitInputText -= OnSubmitInputText;
             UISignals.Instance.onSetQuestionText -= OnSetQuestionText;
+            QASignals.Instance.onNextQuestion -= OnNextQuestion;
         }
 
         private void OnDisable()
@@ -156,6 +157,16 @@ namespace Managers
         public void ArrangeKeyboardPanel()
         {
             keyboardGameObject.SetActive(!keyboardGameObject.activeInHierarchy);
+        }
+
+        public void ActivateSubmitAnim()
+        {
+            animController.PlaySubmitAnim();
+        }
+
+        private void OnNextQuestion()
+        {
+            animController.ResetUIAnim();
         }
     }
 }

@@ -42,12 +42,14 @@ namespace Managers
         {
             UISignals.Instance.onCheckAnswer += OnCheckAnswer;
             QASignals.Instance.onNextQuestion += OnNextQuestion;
+            QASignals.Instance.onGetQuestionIndex += OnGetQuestionIndex;
         }
 
         private void UnsubscribeEvents()
         {
             UISignals.Instance.onCheckAnswer -= OnCheckAnswer;
             QASignals.Instance.onNextQuestion -= OnNextQuestion;
+            QASignals.Instance.onGetQuestionIndex -= OnGetQuestionIndex;
         }
 
         private void OnDisable()
@@ -75,6 +77,11 @@ namespace Managers
         private void OnNextQuestion()
         {
             questionController.NextQuestion();
+        }
+
+        private float OnGetQuestionIndex()
+        {
+            return questionController.GetQuestionIndex();
         }
     }
 }

@@ -27,20 +27,20 @@ namespace Controllers.Opponent
 
         public void WriteTrueAnswerToPlatforms(string answer)
         {
-            manager.RiseOpponent(answer.Length);
+            manager.RiseOpponent(answer.Length + answer.Length* 0.05f,1.5f*answer.Length);
             for (var i = answer.Length-1; i >=0; i--)
             {
                 var stairGameObject = PoolSignals.Instance.onGetPoolObject?.Invoke(PoolTypes.Stair.ToString(),transform);
                 if (stairGameObject == null) continue;
                 stairGameObject.transform.position = manager.transform.position;
-                SetStairPos(stairGameObject);
                 SendStairSignalAsync(stairGameObject,answer[i]);
             }
         }
 
         private async void  SendStairSignalAsync(GameObject stair,char letter)
         {
-            await Task.Yield();
+            SetStairPos(stair);
+            await Task.Delay(1500);
             QASignals.Instance.onWriteLetterToStair?.Invoke(stair.gameObject.GetInstanceID(),letter);
         }
 

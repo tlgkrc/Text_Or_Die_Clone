@@ -29,9 +29,9 @@ namespace Managers
             PlayerSignals.Instance.onSubscribeOpponentMediator?.Invoke(this);
         }
 
-        public void RiseOpponent(float sizeOfStairs)
+        public void RiseOpponent(float sizeOfStairs,float delayTime)
         {
-            transform.DOLocalMoveY(sizeOfStairs,.25f).SetEase(Ease.OutBack);
+            transform.DOLocalMoveY(transform.position.z + sizeOfStairs,delayTime/2).SetEase(Ease.OutBack);
         }
 
         public void WriteAnswerToPlatform(string answer)

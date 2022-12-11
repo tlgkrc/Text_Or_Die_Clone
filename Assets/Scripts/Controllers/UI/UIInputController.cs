@@ -72,7 +72,7 @@ namespace Controllers.UI
                 if (_inputText.Length != 0)
                 {
                     UISignals.Instance.onCheckAnswer?.Invoke(_inputText);
-                    QASignals.Instance.onNextQuestion?.Invoke();
+                    manager.ActivateSubmitAnim();
                 }
             }
         }

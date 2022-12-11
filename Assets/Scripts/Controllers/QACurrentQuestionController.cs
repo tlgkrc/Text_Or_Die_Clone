@@ -87,5 +87,10 @@ namespace Controllers
             _currentQuestionIndex++;
             SetCurrentQuestion(_currentQuestionIndex);
         }
+
+        public float GetQuestionIndex()
+        {
+            return _currentQuestionIndex;
+        }
     }
 }
