@@ -21,6 +21,7 @@ namespace Managers
         //[SerializeField] private TextMeshProUGUI scoreText;
         [SerializeField] private TextMeshProUGUI questionText;
         [SerializeField] private UIInputController uIInputController;
+        [SerializeField] private GameObject keyboardGameObject;
 
         #endregion
 
@@ -48,8 +49,8 @@ namespace Managers
         {
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
-            CoreGameSignals.Instance.onLevelFailed += OnGameFailed;
-            CoreGameSignals.Instance.onNextLevel += OnNextLevel;
+            CoreGameSignals.Instance.onLevelFailed += OnLevelFailed;
+            CoreGameSignals.Instance.onNextLevel += OnNextTournament;
             UISignals.Instance.onOpenPanel += OnOpenPanel;
             UISignals.Instance.onClosePanel += OnClosePanel;
             UISignals.Instance.onSetScoreText += OnSetScoreText;
@@ -64,8 +65,8 @@ namespace Managers
         {
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
-            CoreGameSignals.Instance.onNextLevel -= OnNextLevel;
-            CoreGameSignals.Instance.onLevelFailed -= OnGameFailed;
+            LevelSignals.Instance.onNextTournament -= OnNextTournament;
+            LevelSignals.Instance.onLevelFailed -= OnLevelFailed;
             UISignals.Instance.onOpenPanel -= OnOpenPanel;
             UISignals.Instance.onClosePanel -= OnClosePanel;
             UISignals.Instance.onSetScoreText -= OnSetScoreText;
@@ -82,10 +83,6 @@ namespace Managers
 
         #endregion
 
-        private void Start()
-        {
-        }
-
         private void OnOpenPanel(UIPanels panelParam)
         {
             _uiPanelController.Execute(panelParam , true);
@@ -100,15 +97,16 @@ namespace Managers
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.StartPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.LevelPanel);
+            keyboardGameObject.SetActive(true);
         }
 
-        private void OnGameFailed()
+        private void OnLevelFailed()
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.FailPanel);
         }
 
-        private void OnNextLevel()
+        private void OnNextTournament()
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.NextLevel);
@@ -137,22 +135,27 @@ namespace Managers
 
         private void OnAddCharToInputText(char character)
         {
-            uIInputController.AddCharToInputText(character);
+            uIInputController.AddCharToInputText(character,panels[(int)UIPanels.StartPanel].activeInHierarchy);
         }
 
         private void OnDeleteInputText()
         {
-            uIInputController.DeleteInputText();
+            uIInputController.DeleteInputText(panels[(int)UIPanels.StartPanel].activeInHierarchy);
         }
 
         private void OnSubmitInputText()
         {
-            uIInputController.SubmitInputText();
+            uIInputController.SubmitInputText(panels[(int)UIPanels.StartPanel].activeInHierarchy);
         }
 
         private void OnSetQuestionText(string question)
         {
             questionText.text = question;
+        }
+
+        public void ArrangeKeyboardPanel()
+        {
+            keyboardGameObject.SetActive(!keyboardGameObject.activeInHierarchy);
         }
     }
 }

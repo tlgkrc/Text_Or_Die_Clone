@@ -12,8 +12,9 @@ namespace Managers
 
         #region Serialized Variables
 
+        [SerializeField] private CinemachineVirtualCamera startCam;
         [SerializeField] private CinemachineVirtualCamera levelCam;
-
+       
         #endregion
 
         #region Private Variables
@@ -32,7 +33,7 @@ namespace Managers
 
         private void Start()
         {
-            OnSetCameraTarget();
+            OnSetCameraState(CameraStates.StartCam);
         }
 
         private void GetReferences()
@@ -48,12 +49,12 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-            CoreGameSignals.Instance.onPlay += OnSetCameraTarget;
+            CoreGameSignals.Instance.onPlay += OnPlay;
         }
 
         private void UnsubscribeEvents()
         {
-            CoreGameSignals.Instance.onPlay -= OnSetCameraTarget;
+            CoreGameSignals.Instance.onPlay -= OnPlay;
         }
 
         private void OnDisable()
@@ -65,7 +66,11 @@ namespace Managers
         
         private void SetCameraStates()
         {
-            if (_cameraState == CameraStates.LevelCam)
+            if (_cameraState == CameraStates.StartCam)
+            {
+                _camAnimator.Play(CameraStates.StartCam.ToString());
+            }
+            else if (_cameraState == CameraStates.LevelCam)
             {
                 _camAnimator.Play(CameraStates.LevelCam.ToString());
             }
@@ -77,10 +82,11 @@ namespace Managers
             SetCameraStates();
         }
         
-        private void OnSetCameraTarget()
+        private void OnPlay()
         {
             var playerManager = FindObjectOfType<PlayerManager>().transform;
             levelCam.Follow = playerManager;
+            OnSetCameraState(CameraStates.LevelCam);
         }
      
         private void OnReset()

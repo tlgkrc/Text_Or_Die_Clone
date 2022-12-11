@@ -4,6 +4,7 @@ using Data.UnityObject;
 using Data.ValueObject;
 using DG.Tweening;
 using Signals;
+using TMPro;
 
 namespace Managers
 {
@@ -21,7 +22,9 @@ namespace Managers
 
         [SerializeField] private PlayerMeshController meshController;
         [SerializeField] private PlayerPhysicsController physicsController;
-        [SerializeField] private PlayerMovementController movementController;
+        [SerializeField] private PlayerAnimController animController;
+        [SerializeField] private PlayerPlatformController platformController;
+        [SerializeField] private TextMeshPro playerNameTMP;
 
         #endregion
 
@@ -49,20 +52,18 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-            InputSignals.Instance.onInputTaken += OnActivateMovement;
-            InputSignals.Instance.onInputReleased += OnDeactivateMovement;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
-            PlayerSignals.Instance.onGetNewPlayerScale += OnSetNewPlayerScale;
+            QASignals.Instance.onWriteTrueAnswer += OnWriteTrueAnswer;
+            UISignals.Instance.onSetPlayerName += OnSetPlayerName;
         }
 
         private void UnsubscribeEvents()
         {
-            InputSignals.Instance.onInputTaken -= OnActivateMovement;
-            InputSignals.Instance.onInputReleased -= OnDeactivateMovement;
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
-            PlayerSignals.Instance.onGetNewPlayerScale -= OnSetNewPlayerScale;
+            QASignals.Instance.onWriteTrueAnswer -= OnWriteTrueAnswer;
+            UISignals.Instance.onSetPlayerName -= OnSetPlayerName;
         }
 
         private void OnDisable()
@@ -72,25 +73,23 @@ namespace Managers
 
         #endregion
         
-        private PlayerData GetPlayerData() => Resources.Load<CD_Player>("Data/CD_PlayerData").Data;
+        //private PlayerData GetPlayerData() => Resources.Load<CD_Player>("Data/CD_PlayerData").Data;
 
         private void GetReferences()
         {
-            _data = GetPlayerData();
+            //_data = GetPlayerData();
         }
 
         private void SendDataToControllers()
         {
-            movementController.SetData(_data);
         }
 
         private void OnPlay()
         {
-            movementController.ActivateMovement();
+            
         }
         private void OnReset()
         {
-            movementController.StopPlayer();
         }
 
         private void OnActivateMovement()
@@ -103,15 +102,24 @@ namespace Managers
             ResetScale();
         }
 
-        private void OnSetNewPlayerScale(float newScale)
-        {
-            var scale = new Vector3(newScale, newScale, transform.localScale.z);
-            transform.DOScale(scale*_data.ScaleFactor, .5f);
-        }
-
         private void ResetScale()
         {
             transform.DOScale(Vector3.one, .5f);
+        }
+
+        private void OnWriteTrueAnswer(string trueAnswer)
+        {
+            platformController.WriteTrueAnswerToPlatforms(trueAnswer);
+        }
+
+        public void RisePlayer(float countOfStair)
+        {
+            transform.DOLocalMoveY(countOfStair,.25f).SetEase(Ease.OutBack);
+        }
+
+        private void OnSetPlayerName(string playerName)
+        {
+            playerNameTMP.text = playerName;
         }
     }
 }

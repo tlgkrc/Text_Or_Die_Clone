@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Extentions;
+using Managers;
 using UnityEngine.Events;
 
 namespace Signals
@@ -11,6 +13,6 @@ namespace Signals
         public UnityAction onActivateImpactBomb = delegate {  };
         public UnityAction onActivatePlayerBomb = delegate {  };
         public Func<ushort> onGetAICount = delegate { return 0;};
-        public UnityAction<string[]> onSetAIAnswers = delegate {  };
+        public UnityAction<OpponentAIManager> onSubscribeOpponentMediator = delegate {  };
     }
 }

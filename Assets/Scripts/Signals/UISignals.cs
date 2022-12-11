@@ -15,5 +15,6 @@ namespace Signals
         public UnityAction onSubmitInputText = delegate {  };
         public UnityAction<string> onSetQuestionText = delegate {  };
         public UnityAction<string> onCheckAnswer = delegate {  };
+        public UnityAction<string> onSetPlayerName = delegate {  };
     }
 }
