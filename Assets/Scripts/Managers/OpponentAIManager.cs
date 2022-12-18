@@ -29,14 +29,22 @@ namespace Managers
             PlayerSignals.Instance.onSubscribeOpponentMediator?.Invoke(this);
         }
 
-        public void RiseOpponent(float sizeOfStairs,float delayTime)
+        public void RiseOpponent(float sizeOfStairs)
         {
-            transform.DOLocalMoveY(transform.position.z + sizeOfStairs,delayTime/2).SetEase(Ease.OutBack);
+            transform.DOLocalMoveY(transform.position.y + sizeOfStairs,.5f).SetEase(Ease.OutBack);
         }
 
         public void WriteAnswerToPlatform(string answer)
         {
             platformController.WriteTrueAnswerToPlatforms(answer);
+        }
+
+        public void MoveX(short distance)
+        {
+            animController.PlayJumpAnim();
+            transform.DOMoveX(transform.position.x + distance, .5f).OnComplete(()=> 
+                animController.PlayIdleAnim());
+            platformController.MovePlatform(distance);
         }
     }
 }

@@ -17,6 +17,7 @@ namespace Managers
         #region Private Variables
 
         [ShowInInspector]private List<OpponentAIManager> _opponentList = new List<OpponentAIManager>();
+        private const short _offset = 4;
 
         #endregion
         
@@ -32,6 +33,7 @@ namespace Managers
         private void SubscribeEvents()
         {
             PlayerSignals.Instance.onSubscribeOpponentMediator += OnSubscribeMediator;
+            PlayerSignals.Instance.onUnsubscribeOpponentMediator += OnUnsubscribeOpponentMediator;
             QASignals.Instance.onDistributeAIAnswers += OnDistributeAIAnswers;
             PlayerSignals.Instance.onGetAICount += OnGetAICount;
             CoreGameSignals.Instance.onPlay += OnPlay;
@@ -40,6 +42,7 @@ namespace Managers
         private void UnsubscribeEvents()
         {
             PlayerSignals.Instance.onSubscribeOpponentMediator -= OnSubscribeMediator;
+            PlayerSignals.Instance.onUnsubscribeOpponentMediator -= OnUnsubscribeOpponentMediator;
             QASignals.Instance.onDistributeAIAnswers -= OnDistributeAIAnswers;
             PlayerSignals.Instance.onGetAICount -= OnGetAICount;
             CoreGameSignals.Instance.onPlay -= OnPlay;
@@ -56,12 +59,25 @@ namespace Managers
         {
             _opponentList.Add(opponentAIManager);
         }
+        
+        private void OnUnsubscribeOpponentMediator(OpponentAIManager opponentAIManager)
+        {
+            _opponentList.Remove(opponentAIManager);
+            _opponentList.TrimExcess();
+            if (_opponentList.Count<= 0)
+            {
+                LevelSignals.Instance.onLevelSuccesfull?.Invoke();
+            }
 
+            MoveAI(opponentAIManager);
+        }
+        
         private void OnDistributeAIAnswers(List<string> answerList)
         {
+            var randomNumber = Random.Range(0, answerList.Count*2);
             for (int i = 0; i < _opponentList.Count; i++)
             {
-                _opponentList[i].WriteAnswerToPlatform(answerList[i]);
+                _opponentList[i].WriteAnswerToPlatform(randomNumber == i ? "" : answerList[i]);
             }
         }
 
@@ -72,7 +88,38 @@ namespace Managers
 
         private void OnPlay()
         {
-            
+        }
+        
+        private void MoveAI(OpponentAIManager opponentAIManager)
+        {
+            var posX = opponentAIManager.transform.position.x;
+
+            if (_opponentList.Count % 2 == 0)
+            {
+                PlayerSignals.Instance.onSetPlayerNewPos?.Invoke(0);
+            }
+            else
+            {
+                if (posX > 0)
+                {
+                    PlayerSignals.Instance.onSetPlayerNewPos.Invoke(_offset / 2);
+                }
+                else
+                {
+                    PlayerSignals.Instance.onSetPlayerNewPos.Invoke(-_offset / 2);
+                }
+            }
+            foreach (var opponentAI in _opponentList)
+            {
+                if (opponentAI.transform.position.x < posX)
+                {
+                    opponentAI.MoveX(_offset / 2);
+                }
+                else
+                {
+                    opponentAI.MoveX(-_offset / 2);
+                }
+            }
         }
     }
 }

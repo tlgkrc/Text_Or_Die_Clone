@@ -31,11 +31,14 @@ namespace Managers
         private void SubscribeEvents()
         {
             QASignals.Instance.onWriteLetterToStair += OnWriteLetter;
+            LevelSignals.Instance.onCheckWaterLevel += OnCheckWaterLevel;
         }
 
         private void UnsubscribeEvents()
         {
             QASignals.Instance.onWriteLetterToStair -= OnWriteLetter;
+            LevelSignals.Instance.onCheckWaterLevel -= OnCheckWaterLevel;
+
         }
 
         private void OnDisable()
@@ -51,6 +54,13 @@ namespace Managers
             {
                 letterText.text = letter.ToString();
             }
+        }
+
+        private void OnCheckWaterLevel(float waterLevel)
+        {
+            if (!(waterLevel > transform.position.y)) return;
+            var newColor = letterText.color;
+            letterText.color = new Color(newColor.a, newColor.b, newColor.g, .2f);
         }
     }
 }

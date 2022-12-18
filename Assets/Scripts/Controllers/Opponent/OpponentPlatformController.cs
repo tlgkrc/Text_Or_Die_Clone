@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using DG.Tweening;
 using Enums;
 using Managers;
 using Signals;
@@ -20,6 +22,7 @@ namespace Controllers.Opponent
         #region Private Variables
 
         private Vector3 _lastPos;
+        private List<GameObject> stairList = new List<GameObject>();
 
         #endregion
 
@@ -27,11 +30,12 @@ namespace Controllers.Opponent
 
         public void WriteTrueAnswerToPlatforms(string answer)
         {
-            manager.RiseOpponent(answer.Length + answer.Length* 0.05f,1.5f*answer.Length);
+            manager.RiseOpponent(answer.Length + answer.Length* 0.05f);
             for (var i = answer.Length-1; i >=0; i--)
             {
                 var stairGameObject = PoolSignals.Instance.onGetPoolObject?.Invoke(PoolTypes.Stair.ToString(),transform);
                 if (stairGameObject == null) continue;
+                stairList.Add(stairGameObject);
                 stairGameObject.transform.position = manager.transform.position;
                 SendStairSignalAsync(stairGameObject,answer[i]);
             }
@@ -65,6 +69,15 @@ namespace Controllers.Opponent
         {
             stair.transform.position = manager.transform.position + Vector3.down * indexOfStair * stair.gameObject.transform.localScale.z +
                                        new Vector3(0, 0.05f, 0) ;
+            stairList.Add(stair);
+        }
+
+        public void MovePlatform(short distance)
+        {
+            foreach (var stair in stairList)
+            {
+                stair.transform.DOMoveX(stair.transform.position.x + distance, .5f);
+            }
         }
     }
 }

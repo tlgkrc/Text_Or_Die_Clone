@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using DG.Tweening;
 using Enums;
 using Managers;
@@ -21,6 +22,7 @@ namespace Controllers.Player
 
         private Vector3 _lastPos;
         private Sequence _stairSequence;
+        private List<GameObject> _stairList = new List<GameObject>();
 
         #endregion
 
@@ -33,12 +35,13 @@ namespace Controllers.Player
 
         public void WriteTrueAnswerToPlatforms(string answer)
         {
-            manager.RisePlayer(answer.Length+ answer.Length*0.05f,1.5f* answer.Length);
+            manager.RisePlayer(answer.Length + answer.Length*0.05f);
             for (var i = answer.Length-1; i >=0; i--)
             {
                 var stairGameObject = PoolSignals.Instance.onGetPoolObject?.Invoke(PoolTypes.Stair.ToString(),transform);
                 if (stairGameObject == null) continue;
-                stairGameObject.transform.localScale = Vector3.one*.5f;
+                _stairList.Add(stairGameObject);
+                stairGameObject.transform.localScale = Vector3.zero;
                 stairGameObject.transform.position = manager.transform.position;
                 SendStairSignalAsync(stairGameObject,answer[i]);
             }
@@ -64,7 +67,7 @@ namespace Controllers.Player
         private void SetStairPos(GameObject stair)
         {
 
-            _lastPos += Vector3.up * stair.transform.localScale.z +new Vector3(0, 0.05f, 0);
+            _lastPos += Vector3.up  +new Vector3(0, 0.05f, 0);
             _stairSequence = DOTween.Sequence();
             _stairSequence.Append(stair.transform.DOMoveY(_lastPos.y, .5f));
             _stairSequence.Join(stair.transform.DOScale(Vector3.one, .5f));
@@ -72,7 +75,17 @@ namespace Controllers.Player
 
         private void SetDefaultStairPos(GameObject stair, int indexOfStair)
         {
-            stair.transform.position = Vector3.down * indexOfStair * stair.gameObject.transform.localScale.z -new Vector3(0, 0.05f, 0) ;
+            stair.transform.localPosition = Vector3.down * indexOfStair * stair.transform.localScale.y +new Vector3(0, 0.05f, 0) ;
+            _stairList.Add(stair);
+        }
+
+        public void MovePlatform(short distance)
+        {
+            foreach (var stair in _stairList)
+            {
+                stair.transform.DOMoveX(stair.transform.position.x + distance, .5f);
+                _lastPos.x += distance;
+            }
         }
     }
 }

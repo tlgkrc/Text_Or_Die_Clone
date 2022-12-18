@@ -44,7 +44,7 @@ Animator:
   m_GameObject: {fileID: 81747547809480194}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: e5ef2b41da7c8024eb476bfadaf885f4, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4c40f81e4ca324846a05e4f4d4bfcda7, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -839,6 +839,7 @@ GameObject:
   - component: {fileID: 7270201356019906507}
   - component: {fileID: 7270201356019906504}
   - component: {fileID: 7270201356019906511}
+  - component: {fileID: 1475470655625412467}
   m_Layer: 0
   m_Name: Physic
   m_TagString: Untagged
@@ -890,6 +891,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1475470655625412467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7270201356019906510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 624e6c0d2f2c47a9aa95cb41773ea3d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manager: {fileID: 7270201356978135391}
 --- !u!1 &7270201356978135390
 GameObject:
   m_ObjectHideFlags: 0
@@ -1130,7 +1144,7 @@ GameObject:
   - component: {fileID: 8708225969175345151}
   - component: {fileID: 3537105932508987465}
   m_Layer: 0
-  m_Name: Name
+  m_Name: NameTMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

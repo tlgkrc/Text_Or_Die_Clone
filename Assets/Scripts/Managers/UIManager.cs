@@ -167,6 +167,7 @@ namespace Managers
         private void OnNextQuestion()
         {
             animController.ResetUIAnim();
+            uIInputController.DeleteInputText(false);
         }
     }
 }

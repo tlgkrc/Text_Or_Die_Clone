@@ -10,5 +10,6 @@ namespace Signals
         public UnityAction onLevelFailed = delegate {  };
         public UnityAction onLevelSuccesfull  =delegate {  };
         public UnityAction onRiseWaterLevel = delegate {  };
+        public UnityAction<float> onCheckWaterLevel = delegate {  };
     }
 }

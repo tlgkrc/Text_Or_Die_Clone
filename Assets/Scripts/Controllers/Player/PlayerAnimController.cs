@@ -1,4 +1,5 @@
-﻿using Managers;
+﻿using Enums;
+using Managers;
 using UnityEngine;
 
 namespace Controllers.Player
@@ -19,5 +20,15 @@ namespace Controllers.Player
         #endregion
 
         #endregion
+
+        public void PlayIdleAnim()
+        {
+            animator.SetTrigger(AnimTypes.Idle.ToString());
+        }
+
+        public void PlayJumpAnim()
+        {
+            animator.SetTrigger(AnimTypes.Jump.ToString());
+        }
     }
 }

@@ -334,7 +334,7 @@ GameObject:
   - component: {fileID: 6224186119960090067}
   - component: {fileID: 8980222653157525032}
   m_Layer: 0
-  m_Name: Name
+  m_Name: NameTMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -727,6 +727,7 @@ GameObject:
   - component: {fileID: 7435233916715008613}
   - component: {fileID: 7435233916715008614}
   - component: {fileID: 7435233916715008609}
+  - component: {fileID: 8773249047876345920}
   m_Layer: 0
   m_Name: Physic
   m_TagString: Untagged
@@ -778,6 +779,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8773249047876345920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7435233916715008608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 624e6c0d2f2c47a9aa95cb41773ea3d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manager: {fileID: 7435233917803926769}
 --- !u!1 &7435233917444802621
 GameObject:
   m_ObjectHideFlags: 0
@@ -1013,7 +1027,7 @@ Animator:
   m_GameObject: {fileID: 8068601481503169100}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: d8fee378ef61c0d4babd7ab0a5477b73, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4c40f81e4ca324846a05e4f4d4bfcda7, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

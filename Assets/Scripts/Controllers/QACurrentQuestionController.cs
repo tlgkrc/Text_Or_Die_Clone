@@ -35,10 +35,10 @@ namespace Controllers
         public void SetQuestionData(TextAsset textAsset)
         {
             _textAsset = textAsset;
-            ReadCSV();
+            ReadCsv();
         }
 
-        private void ReadCSV()
+        private void ReadCsv()
         {
             _questionsAndAnswers = _textAsset.text.Split(new string[]{"\n"},StringSplitOptions.None);
         }

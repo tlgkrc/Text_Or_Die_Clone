@@ -41,6 +41,7 @@ namespace Managers
         {
             GetReferences();
             SendDataToControllers();
+            animController.PlayIdleAnim();
         }
 
         #region Event Subscription
@@ -56,6 +57,7 @@ namespace Managers
             CoreGameSignals.Instance.onReset += OnReset;
             QASignals.Instance.onWriteTrueAnswer += OnWriteTrueAnswer;
             UISignals.Instance.onSetPlayerName += OnSetPlayerName;
+            PlayerSignals.Instance.onSetPlayerNewPos += OnSetPlayerNewPosX;
         }
 
         private void UnsubscribeEvents()
@@ -64,6 +66,7 @@ namespace Managers
             CoreGameSignals.Instance.onReset -= OnReset;
             QASignals.Instance.onWriteTrueAnswer -= OnWriteTrueAnswer;
             UISignals.Instance.onSetPlayerName -= OnSetPlayerName;
+            PlayerSignals.Instance.onSetPlayerNewPos -= OnSetPlayerNewPosX;
         }
 
         private void OnDisable()
@@ -112,14 +115,24 @@ namespace Managers
             platformController.WriteTrueAnswerToPlatforms(trueAnswer);
         }
 
-        public void RisePlayer(float countOfStair,float delayTime)
+        public void RisePlayer(float countOfStair)
         {
-            transform.DOLocalMoveY( countOfStair,delayTime/2).SetEase(Ease.OutBack);
+            animController.PlayJumpAnim();
+            transform.DOLocalMoveY( transform.localPosition.y + countOfStair,.5f).SetEase(Ease.OutBack).OnComplete(() =>
+            {
+                animController.PlayIdleAnim();
+            });
         }
 
         private void OnSetPlayerName(string playerName)
         {
             playerNameTMP.text = playerName;
+        }
+
+        private void OnSetPlayerNewPosX(short distance)
+        {
+            transform.DOMoveX(transform.position.x + distance, .5f);
+            platformController.MovePlatform(distance);
         }
     }
 }

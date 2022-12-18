@@ -36,6 +36,7 @@ namespace Managers
             if (index != null) transform.DOLocalMoveY((float)(transform.position.y+ index+3), .5f).OnComplete(() =>
             {
                 QASignals.Instance.onNextQuestion?.Invoke();
+                LevelSignals.Instance.onCheckWaterLevel?.Invoke(transform.position.y);
             });
         }
     }
