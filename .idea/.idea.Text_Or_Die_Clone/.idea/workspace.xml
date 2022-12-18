@@ -2,34 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1453997e-5327-4707-90fd-d637f0f13e5d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Controllers/Opponent/OpponentPhysicController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Controllers/Opponent/OpponentPhysicController.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Enums/AnimTypes.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Enums/AnimTypes.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Extentions/LookCinemachineAxis.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Extentions/LookCinemachineAxis.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Text_Or_Die_Clone/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Text_Or_Die_Clone/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Oppenent_1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Oppenent_1.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Oppenent_2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Oppenent_2.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/PlayerManager.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/PlayerManager.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Stair.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Stair.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Breathing Idle.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Breathing Idle.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/mixamo.com.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/mixamo.com.anim.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controllers/Opponent/OpponentAnimController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controllers/Opponent/OpponentAnimController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controllers/Opponent/OpponentPlatformController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controllers/Opponent/OpponentPlatformController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controllers/Player/PlayerAnimController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controllers/Player/PlayerAnimController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controllers/Player/PlayerPlatformController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controllers/Player/PlayerPlatformController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controllers/QACurrentQuestionController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controllers/QACurrentQuestionController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/OpponentAIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/OpponentAIManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/OpponentAIMediator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/OpponentAIMediator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/PlayerManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/PlayerManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/StairManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/StairManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controllers/UI/UIAnimController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controllers/UI/UIAnimController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/UIManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/WaterManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/WaterManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Signals/LevelSignals.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Signals/LevelSignals.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Signals/PlayerSignals.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Signals/PlayerSignals.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Temp/HyperCasual - Stickman Pack 2/Models/Pirat.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Temp/HyperCasual - Stickman Pack 2/Models/Pirat.fbx.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Temp/IgniteCoders/Simple Water Shader/Resources/Water_mat_01.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Temp/IgniteCoders/Simple Water Shader/Resources/Water_mat_01.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +83,7 @@
       <workItem from="1670839560885" duration="8232000" />
       <workItem from="1670934401198" duration="2659000" />
       <workItem from="1671349621127" duration="3793000" />
-      <workItem from="1671355970762" duration="10153000" />
+      <workItem from="1671355970762" duration="13052000" />
     </task>
     <servers />
   </component>

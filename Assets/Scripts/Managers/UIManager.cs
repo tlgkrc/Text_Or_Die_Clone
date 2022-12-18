@@ -49,8 +49,9 @@ namespace Managers
         {
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
-            CoreGameSignals.Instance.onLevelFailed += OnLevelFailed;
-            CoreGameSignals.Instance.onNextLevel += OnNextTournament;
+            LevelSignals.Instance.onLevelFailed += OnLevelFailed;
+            LevelSignals.Instance.onNextTournament -= OnNextTournament;
+            LevelSignals.Instance.onRiseWaterLevel += OnRiseWaterLevelWarning;
             UISignals.Instance.onOpenPanel += OnOpenPanel;
             UISignals.Instance.onClosePanel += OnClosePanel;
             UISignals.Instance.onSetScoreText += OnSetScoreText;
@@ -67,6 +68,7 @@ namespace Managers
             CoreGameSignals.Instance.onReset -= OnReset;
             LevelSignals.Instance.onNextTournament -= OnNextTournament;
             LevelSignals.Instance.onLevelFailed -= OnLevelFailed;
+            LevelSignals.Instance.onRiseWaterLevel -= OnRiseWaterLevelWarning;
             UISignals.Instance.onOpenPanel -= OnOpenPanel;
             UISignals.Instance.onClosePanel -= OnClosePanel;
             UISignals.Instance.onSetScoreText -= OnSetScoreText;
@@ -168,6 +170,11 @@ namespace Managers
         {
             animController.ResetUIAnim();
             uIInputController.DeleteInputText(false);
+        }
+
+        private void OnRiseWaterLevelWarning()
+        {
+            animController.PlayWarningAnim();
         }
     }
 }
