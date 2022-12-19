@@ -1,5 +1,4 @@
-﻿using System;
-using Managers;
+﻿using Managers;
 using Signals;
 using UnityEngine;
 
@@ -28,7 +27,8 @@ namespace Controllers.Opponent
             if (other.CompareTag("Water"))
             {
                 PlayerSignals.Instance.onUnsubscribeOpponentMediator?.Invoke(manager);
-                manager.gameObject.SetActive(false);
+                
+                manager.DeactivateOpponent();
             }
         }
     }

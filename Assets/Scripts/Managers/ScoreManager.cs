@@ -1,5 +1,4 @@
 ﻿using Signals;
-using TMPro;
 using UnityEngine;
 
 namespace Managers

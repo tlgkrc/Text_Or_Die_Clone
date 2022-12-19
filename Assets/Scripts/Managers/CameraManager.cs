@@ -1,5 +1,4 @@
 using Cinemachine;
-using DG.Tweening;
 using Enums;
 using Signals;
 using UnityEngine;
@@ -12,7 +11,6 @@ namespace Managers
 
         #region Serialized Variables
 
-        [SerializeField] private CinemachineVirtualCamera startCam;
         [SerializeField] private CinemachineVirtualCamera levelCam;
        
         #endregion
@@ -49,12 +47,12 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-            CoreGameSignals.Instance.onPlay += OnPlay;
+            PlayerSignals.Instance.onGetPlayerTransform+= OnGetPlayerTransform;
         }
 
         private void UnsubscribeEvents()
         {
-            CoreGameSignals.Instance.onPlay -= OnPlay;
+            PlayerSignals.Instance.onGetPlayerTransform -= OnGetPlayerTransform;
         }
 
         private void OnDisable()
@@ -81,19 +79,11 @@ namespace Managers
             _cameraState = cameraState;
             SetCameraStates();
         }
-        
-        private void OnPlay()
+
+        private void OnGetPlayerTransform(Transform playerTransform)
         {
-            var playerManager = FindObjectOfType<PlayerManager>().transform;
-            levelCam.Follow = playerManager;
-            OnSetCameraState(CameraStates.LevelCam);
-        }
-     
-        private void OnReset()
-        {
-            _cameraState = CameraStates.LevelCam;
-            levelCam.Follow = null; 
-            levelCam.LookAt = null;
+           levelCam.Follow = playerTransform;
+           OnSetCameraState(CameraStates.LevelCam);
         }
     }
 }

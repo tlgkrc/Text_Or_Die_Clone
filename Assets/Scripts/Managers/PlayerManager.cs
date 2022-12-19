@@ -89,7 +89,7 @@ namespace Managers
 
         private void OnPlay()
         {
-            
+            PlayerSignals.Instance.onGetPlayerTransform?.Invoke(transform);
         }
         private void OnReset()
         {

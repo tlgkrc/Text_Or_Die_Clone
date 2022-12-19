@@ -1,5 +1,4 @@
 using Extentions;
-using UnityEngine;
 using UnityEngine.Events;
 
 namespace Signals
@@ -7,6 +6,5 @@ namespace Signals
     public class ScoreSignals : MonoSingleton<ScoreSignals>
     {
         public UnityAction<ushort> onUpdatePlayerScore = delegate {  };
-        
     }
 }

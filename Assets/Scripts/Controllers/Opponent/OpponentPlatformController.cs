@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using DG.Tweening;
 using Enums;
@@ -77,6 +76,14 @@ namespace Controllers.Opponent
             foreach (var stair in stairList)
             {
                 stair.transform.DOMoveX(stair.transform.position.x + distance, .5f);
+            }
+        }
+
+        public void DeactivatePlatform()
+        {
+            foreach (var stair in stairList)
+            {
+                PoolSignals.Instance.onReleasePoolObject?.Invoke(PoolTypes.Stair.ToString(),stair);
             }
         }
     }

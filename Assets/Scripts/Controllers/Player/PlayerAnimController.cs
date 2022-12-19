@@ -1,5 +1,4 @@
 ﻿using Enums;
-using Managers;
 using UnityEngine;
 
 namespace Controllers.Player
@@ -10,7 +9,6 @@ namespace Controllers.Player
 
         #region Serialized Variables
 
-        [SerializeField] private PlayerManager manager;
         [SerializeField] private Animator animator;
 
         #endregion

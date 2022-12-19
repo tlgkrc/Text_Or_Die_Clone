@@ -1,5 +1,4 @@
 ﻿using Enums;
-using Managers;
 using UnityEngine;
 
 namespace Controllers.Opponent
@@ -10,7 +9,6 @@ namespace Controllers.Opponent
 
         #region Serialized Variables
 
-        [SerializeField] private OpponentAIManager manager;
         [SerializeField] private Animator animator;
 
         #endregion

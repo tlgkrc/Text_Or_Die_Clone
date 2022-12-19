@@ -33,8 +33,11 @@ namespace Controllers.UI
             _submitSequence.Append(question.transform.DOLocalMoveY(question.transform.localPosition.y + 600f, 1f));
             _submitSequence.Append(answer.transform.DOLocalMoveX(answer.transform.localPosition.x + 1000f, 1f));
             _submitSequence.Join(keyboard.transform.DOLocalMoveY(keyboard.transform.localPosition.y - 600f, 1f)
-                .OnComplete(
-                    () => { LevelSignals.Instance.onRiseWaterLevel?.Invoke(); }));
+                .OnComplete(() =>
+                    {
+                        LevelSignals.Instance.onRiseWaterLevel?.Invoke(); 
+                        KillSequence(_submitSequence);
+                    }));
         }
 
         public void ResetUIAnim()
@@ -42,7 +45,11 @@ namespace Controllers.UI
             _resetSequence = DOTween.Sequence();
             _resetSequence.Append(question.transform.DOLocalMoveY(question.transform.localPosition.y - 600f, 1f));
             _resetSequence.Append(answer.transform.DOLocalMoveX(answer.transform.localPosition.x - 1000f, 1f));
-            _resetSequence.Join(keyboard.transform.DOLocalMoveY(keyboard.transform.localPosition.y + 600f, 1f));
+            _resetSequence.Join(keyboard.transform.DOLocalMoveY(keyboard.transform.localPosition.y + 600f, 1f)).
+                OnComplete(() =>
+                {
+                    KillSequence(_resetSequence);
+                });
         }
 
         public void PlayWarningAnim()
@@ -50,11 +57,19 @@ namespace Controllers.UI
             warningTMP.SetActive(true);
             _warningSequence = DOTween.Sequence();
             _warningSequence.Append(warningTMP.transform.DOScale(Vector3.one, 1f));
-            _warningSequence.Append(warningTMP.transform.DOShakeScale(1f, 1f));
-            _warningSequence.Join(warningTMP.transform.DOScale(Vector3.zero, 1f).OnComplete(() =>
-            {
+            _warningSequence.Append(warningTMP.transform.DOShakeScale(1f));
+            _warningSequence.Join(warningTMP.transform.DOScale(Vector3.zero, 1f).
+                OnComplete(() => 
+                {
                 warningTMP.SetActive(false);
+                KillSequence(_warningSequence);
             }));
         }
+
+        private void KillSequence(Sequence sequence)
+        {
+            sequence.Kill();
+        }
+        
     }
 }

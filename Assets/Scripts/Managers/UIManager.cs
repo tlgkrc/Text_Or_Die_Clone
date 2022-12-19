@@ -1,13 +1,9 @@
-using System;
 using System.Collections.Generic;
-using Controllers;
 using Controllers.UI;
-using DG.Tweening;
 using Enums;
 using Signals;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Managers
 {

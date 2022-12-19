@@ -32,20 +32,22 @@ namespace Managers
 
         private void SubscribeEvents()
         {
+            CoreGameSignals.Instance.onPlay += OnPlay;
+            PlayerSignals.Instance.onGetAICount += OnGetAICount;
             PlayerSignals.Instance.onSubscribeOpponentMediator += OnSubscribeMediator;
             PlayerSignals.Instance.onUnsubscribeOpponentMediator += OnUnsubscribeOpponentMediator;
             QASignals.Instance.onDistributeAIAnswers += OnDistributeAIAnswers;
-            PlayerSignals.Instance.onGetAICount += OnGetAICount;
-            CoreGameSignals.Instance.onPlay += OnPlay;
         }
 
         private void UnsubscribeEvents()
         {
+            CoreGameSignals.Instance.onPlay -= OnPlay;
+            PlayerSignals.Instance.onGetAICount -= OnGetAICount;
             PlayerSignals.Instance.onSubscribeOpponentMediator -= OnSubscribeMediator;
             PlayerSignals.Instance.onUnsubscribeOpponentMediator -= OnUnsubscribeOpponentMediator;
             QASignals.Instance.onDistributeAIAnswers -= OnDistributeAIAnswers;
-            PlayerSignals.Instance.onGetAICount -= OnGetAICount;
-            CoreGameSignals.Instance.onPlay -= OnPlay;
+            
+            
         }
 
         private void OnDisable()

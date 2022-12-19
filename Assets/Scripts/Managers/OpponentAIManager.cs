@@ -1,5 +1,4 @@
-﻿using System;
-using Controllers.Opponent;
+﻿using Controllers.Opponent;
 using DG.Tweening;
 using Signals;
 using UnityEngine;
@@ -45,6 +44,12 @@ namespace Managers
             transform.DOMoveX(transform.position.x + distance, .5f).OnComplete(()=> 
                 animController.PlayIdleAnim());
             platformController.MovePlatform(distance);
+        }
+
+        public void DeactivateOpponent()
+        {
+            platformController.DeactivatePlatform();
+            gameObject.SetActive(false);
         }
     }
 }
