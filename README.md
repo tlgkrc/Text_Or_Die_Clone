@@ -9,3 +9,5 @@ Tolga Karaca ⏩ [<img src='https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icon
 
 ## GamePlay Video
 
+https://github.com/tlgkrc/Text_Or_Die_Clone/assets/92987466/c9b05b88-8fa5-40db-ac8a-1483b0d3822d
+
