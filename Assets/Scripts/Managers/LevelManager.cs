@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Signals;
+using UnityEngine;
 
 namespace Managers
 {
@@ -19,6 +20,33 @@ namespace Managers
 
         #endregion
         
+        #region Event Supscriptions
+
+        private void OnEnable()
+        {
+            SubscribeEvents();
+        }
+
+        private void SubscribeEvents()
+        {
+            LevelSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
+        }
+
+        private void UnsubscribeEvents()
+        {
+            LevelSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
+        }
+
+        private void OnDisable()
+        {
+            UnsubscribeEvents();
+        }
+
+        #endregion
         
+        private void OnLevelSuccessful()
+        {
+            
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Controllers.Opponent;
 using DG.Tweening;
 using Signals;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Managers
@@ -13,10 +14,6 @@ namespace Managers
 
         [SerializeField] private OpponentAnimController animController;
         [SerializeField] private OpponentPlatformController platformController;
-
-        #endregion
-
-        #region Private Variables
 
         #endregion
 

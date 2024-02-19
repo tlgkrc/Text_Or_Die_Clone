@@ -11,10 +11,6 @@ namespace Controllers
     {
         #region Self Variables
 
-        #region Serialized Variables
-
-        #endregion
-
         #region Private Variables
 
         private TextAsset _textAsset;
@@ -80,6 +76,7 @@ namespace Controllers
             }
             
             QASignals.Instance.onDistributeAIAnswers?.Invoke(newList);
+            _indexList.Clear();
         }
 
         public void NextQuestion()

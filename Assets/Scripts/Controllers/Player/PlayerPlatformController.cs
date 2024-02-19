@@ -36,6 +36,7 @@ namespace Controllers.Player
         public void WriteTrueAnswerToPlatforms(string answer)
         {
             manager.RisePlayer(answer.Length + answer.Length*0.05f);
+            var newColor = new Color(Random.value, Random.value, Random.value);
             for (var i = answer.Length-1; i >=0; i--)
             {
                 var stairGameObject = PoolSignals.Instance.onGetPoolObject?.Invoke(PoolTypes.Stair.ToString(),transform);
@@ -43,15 +44,15 @@ namespace Controllers.Player
                 _stairList.Add(stairGameObject);
                 stairGameObject.transform.localScale = Vector3.zero;
                 stairGameObject.transform.position = manager.transform.position;
-                SendStairSignalAsync(stairGameObject,answer[i]);
+                SendStairSignalAsync(stairGameObject,answer[i],newColor);
             }
         }
 
-        private async void  SendStairSignalAsync(GameObject stair,char letter)
+        private async void  SendStairSignalAsync(GameObject stair,char letter,Color32 color)
         {
             SetStairPos(stair);
             await Task.Delay(1500);
-            QASignals.Instance.onWriteLetterToStair?.Invoke(stair.gameObject.GetInstanceID(),letter);
+            QASignals.Instance.onWriteLetterToStair?.Invoke(stair.gameObject.GetInstanceID(),letter,color);
         }
 
         private void AddDefaultPlatform()

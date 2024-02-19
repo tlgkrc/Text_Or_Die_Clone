@@ -46,7 +46,7 @@ namespace Managers
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
             LevelSignals.Instance.onLevelFailed += OnLevelFailed;
-            LevelSignals.Instance.onNextTournament -= OnNextTournament;
+            LevelSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
             LevelSignals.Instance.onRiseWaterLevel += OnRiseWaterLevelWarning;
             UISignals.Instance.onOpenPanel += OnOpenPanel;
             UISignals.Instance.onClosePanel += OnClosePanel;
@@ -62,8 +62,8 @@ namespace Managers
         {
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
-            LevelSignals.Instance.onNextTournament -= OnNextTournament;
             LevelSignals.Instance.onLevelFailed -= OnLevelFailed;
+            LevelSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
             LevelSignals.Instance.onRiseWaterLevel -= OnRiseWaterLevelWarning;
             UISignals.Instance.onOpenPanel -= OnOpenPanel;
             UISignals.Instance.onClosePanel -= OnClosePanel;
@@ -97,21 +97,23 @@ namespace Managers
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.StartPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.LevelPanel);
             keyboardGameObject.SetActive(true);
+            uIInputController.DeleteInputText(panels[(int)UIPanels.StartPanel].activeInHierarchy);
         }
 
         private void OnLevelFailed()
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.FailPanel);
+            ArrangeKeyboardPanel();
         }
 
-        private void OnNextTournament()
+        private void OnLevelSuccessful()
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.NextLevel);
+            ArrangeKeyboardPanel();
         }
-
-
+        
         private void OnSetScoreText(ushort score)
         {
             //scoreText.text = score.ToString();

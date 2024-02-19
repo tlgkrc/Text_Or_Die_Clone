@@ -21,7 +21,7 @@ namespace Controllers.Opponent
         #region Private Variables
 
         private Vector3 _lastPos;
-        private List<GameObject> stairList = new List<GameObject>();
+        private List<GameObject> _stairList = new List<GameObject>();
 
         #endregion
 
@@ -30,21 +30,22 @@ namespace Controllers.Opponent
         public void WriteTrueAnswerToPlatforms(string answer)
         {
             manager.RiseOpponent(answer.Length + answer.Length* 0.05f);
+            var newColor = new Color(Random.value, Random.value, Random.value);
             for (var i = answer.Length-1; i >=0; i--)
             {
                 var stairGameObject = PoolSignals.Instance.onGetPoolObject?.Invoke(PoolTypes.Stair.ToString(),transform);
                 if (stairGameObject == null) continue;
-                stairList.Add(stairGameObject);
+                _stairList.Add(stairGameObject);
                 stairGameObject.transform.position = manager.transform.position;
-                SendStairSignalAsync(stairGameObject,answer[i]);
+                SendStairSignalAsync(stairGameObject,answer[i],newColor);
             }
         }
 
-        private async void  SendStairSignalAsync(GameObject stair,char letter)
+        private async void  SendStairSignalAsync(GameObject stair,char letter,Color32 color)
         {
             SetStairPos(stair);
-            await Task.Delay(1500);
-            QASignals.Instance.onWriteLetterToStair?.Invoke(stair.gameObject.GetInstanceID(),letter);
+            await Task.Delay(1600);
+            QASignals.Instance.onWriteLetterToStair?.Invoke(stair.gameObject.GetInstanceID(),letter,color);
         }
 
         public void AddDefaultPlatform()
@@ -68,20 +69,22 @@ namespace Controllers.Opponent
         {
             stair.transform.position = manager.transform.position + Vector3.down * indexOfStair * stair.gameObject.transform.localScale.z +
                                        new Vector3(0, 0.05f, 0) ;
-            stairList.Add(stair);
+            _stairList.Add(stair);
         }
 
         public void MovePlatform(short distance)
         {
-            foreach (var stair in stairList)
+            foreach (var stair in _stairList)
             {
                 stair.transform.DOMoveX(stair.transform.position.x + distance, .5f);
             }
+
+            _lastPos += new Vector3(distance, 0, 0);
         }
 
         public void DeactivatePlatform()
         {
-            foreach (var stair in stairList)
+            foreach (var stair in _stairList)
             {
                 PoolSignals.Instance.onReleasePoolObject?.Invoke(PoolTypes.Stair.ToString(),stair);
             }

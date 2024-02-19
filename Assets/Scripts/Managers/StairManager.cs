@@ -1,4 +1,5 @@
-﻿using Signals;
+﻿using System;
+using Signals;
 using TMPro;
 using UnityEngine;
 
@@ -11,15 +12,16 @@ namespace Managers
         #region Serialized Variables
 
         [SerializeField] private TextMeshPro letterText;
-
-        #endregion
-
-        #region Private Variables
-
+        [SerializeField] private new Renderer renderer;
 
         #endregion
 
         #endregion
+
+        private void Awake()
+        {
+            //_material = gameObject.GetComponent<Renderer>().material;
+        }
 
         #region Event Subscriptions
 
@@ -48,11 +50,12 @@ namespace Managers
 
         #endregion
 
-        private void OnWriteLetter(int id,char letter)
+        private void OnWriteLetter(int id,char letter,Color32 color)
         {
             if (gameObject.GetInstanceID() == id)
             {
                 letterText.text = letter.ToString();
+                renderer.material.color = color;
             }
         }
 

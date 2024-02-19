@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Signals;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Managers
 {
@@ -10,15 +12,14 @@ namespace Managers
     {
         #region Self Variables
 
-        #region Serialized Variables
-
-        #endregion
-
         #region Private Variables
 
         [ShowInInspector]private List<OpponentAIManager> _opponentList = new List<OpponentAIManager>();
-        private const short _offset = 4;
-
+        private const short Offset = 4;
+        private List<int> _indexList = new List<int>();
+        private int _randomNumber;
+        private float _randomNumberFactor = 1.5f;
+        private float _randomNumberIncreaseMultiplier = 1.3f; //will reduce the number of correct answers for AI's
         #endregion
         
         #endregion
@@ -68,7 +69,7 @@ namespace Managers
             _opponentList.TrimExcess();
             if (_opponentList.Count<= 0)
             {
-                LevelSignals.Instance.onLevelSuccesfull?.Invoke();
+                LevelSignals.Instance.onLevelSuccessful?.Invoke();
             }
 
             MoveAI(opponentAIManager);
@@ -76,11 +77,26 @@ namespace Managers
         
         private void OnDistributeAIAnswers(List<string> answerList)
         {
-            var randomNumber = Random.Range(0, answerList.Count*2);
+            
             for (int i = 0; i < _opponentList.Count; i++)
             {
-                _opponentList[i].WriteAnswerToPlatform(randomNumber == i ? "" : answerList[i]);
+                _randomNumber = (int)Random.Range(0, answerList.Count*_randomNumberFactor);
+                
+                while (_indexList.Contains(_randomNumber))
+                {
+                    _randomNumber = (int)Random.Range(0, answerList.Count*_randomNumberFactor);
+                }
+                
+                if (_randomNumber > answerList.Count-1)
+                {
+                    continue;
+                }
+                _indexList.Add(_randomNumber);
+                _opponentList[i].WriteAnswerToPlatform(answerList[_randomNumber]);
             }
+            _indexList.Clear();
+            _indexList.TrimExcess();
+            _randomNumberFactor *= _randomNumberIncreaseMultiplier;
         }
 
         private ushort OnGetAICount()
@@ -104,22 +120,22 @@ namespace Managers
             {
                 if (posX > 0)
                 {
-                    PlayerSignals.Instance.onSetPlayerNewPos.Invoke(_offset / 2);
+                    PlayerSignals.Instance.onSetPlayerNewPos.Invoke(Offset / 2);
                 }
                 else
                 {
-                    PlayerSignals.Instance.onSetPlayerNewPos.Invoke(-_offset / 2);
+                    PlayerSignals.Instance.onSetPlayerNewPos.Invoke(-Offset / 2);
                 }
             }
             foreach (var opponentAI in _opponentList)
             {
                 if (opponentAI.transform.position.x < posX)
                 {
-                    opponentAI.MoveX(_offset / 2);
+                    opponentAI.MoveX(Offset / 2);
                 }
                 else
                 {
-                    opponentAI.MoveX(-_offset / 2);
+                    opponentAI.MoveX(-Offset / 2);
                 }
             }
         }
